@@ -12,6 +12,8 @@ export const metadata: Metadata = {
 }
 
 const SignInPage = async () => {
+    console.log("auth é uma função?", typeof auth === "function");
+    console.log(auth)
     const session = await auth();
 
     if(session){

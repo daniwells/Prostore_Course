@@ -1,7 +1,8 @@
-'use server'
+"use server"
 
 import { signInFormSchema } from "../validators"
 import { signIn, signOut } from "@/auth";
+// import { signIn, signOut } from "next-auth/react";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 
@@ -10,9 +11,11 @@ export async function signInWithCredentials(prevState: unknown, formData: FormDa
         const user = signInFormSchema.parse({
             email: formData.get("email"),
             password: formData.get("password"),
+            redirect: false,
         });
-
-        await signIn("credentials", user);
+        
+        const response = await signIn("credentials", user);
+        console.log(response)
 
         return { success: true, message: "Signed in successfully" }
     }catch(error){
