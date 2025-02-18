@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useTransition } from "react";
 import { ShippingAddress } from "@/types";
 import { shippingAddressSchema } from "@/lib/validators";
-import { ControllerRenderProps, useForm } from "react-hook-form";
+import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { shippingAddressDefaultValues } from "@/lib/constants";
@@ -13,6 +13,7 @@ import { Form, FormField, FormLabel, FormItem, FormControl, FormDescription, For
 import { ArrowRight, Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { updateUserAddress } from "@/lib/actions/user.actions";
+import { Input } from "@/components/ui/input";
 
 const ShippingAddressForm = ({ address }: {address: ShippingAddress}) => {
     const router = useRouter();
@@ -25,9 +26,20 @@ const ShippingAddressForm = ({ address }: {address: ShippingAddress}) => {
 
     const [ isPending, startTransition ] = useTransition();
 
-    const onSubmit = () => {
+    const onSubmit: SubmitHandler<z.infer<typeof shippingAddressSchema>> = (values) => {
+        startTransition(async () => {
+            const res = await updateUserAddress(values);
 
-        return;
+            if(!res.success){
+                toast({
+                    variant: "destructive",
+                    description: res.message,
+                });
+                return;
+            }
+
+            router.push("/payment-method");
+        });
     }
 
     return ( 
@@ -49,9 +61,6 @@ const ShippingAddressForm = ({ address }: {address: ShippingAddress}) => {
                                         <FormControl>
                                             <Input placeholder="Enter full name" {...field}/>
                                         </FormControl>
-                                        <FormDescription>
-                                            This is your public display name.
-                                        </FormDescription>
                                         <FormMessage/>
                                     </FormItem>
                                 )}
@@ -67,9 +76,6 @@ const ShippingAddressForm = ({ address }: {address: ShippingAddress}) => {
                                         <FormControl>
                                             <Input placeholder="Enter address" {...field}/>
                                         </FormControl>
-                                        <FormDescription>
-                                            This is your public display name.
-                                        </FormDescription>
                                         <FormMessage/>
                                     </FormItem>
                                 )}
@@ -85,9 +91,6 @@ const ShippingAddressForm = ({ address }: {address: ShippingAddress}) => {
                                         <FormControl>
                                             <Input placeholder="Enter city" {...field}/>
                                         </FormControl>
-                                        <FormDescription>
-                                            This is your public display name.
-                                        </FormDescription>
                                         <FormMessage/>
                                     </FormItem>
                                 )}
@@ -103,9 +106,6 @@ const ShippingAddressForm = ({ address }: {address: ShippingAddress}) => {
                                         <FormControl>
                                             <Input placeholder="Enter postal code" {...field}/>
                                         </FormControl>
-                                        <FormDescription>
-                                            This is your public display name.
-                                        </FormDescription>
                                         <FormMessage/>
                                     </FormItem>
                                 )}
@@ -121,9 +121,6 @@ const ShippingAddressForm = ({ address }: {address: ShippingAddress}) => {
                                         <FormControl>
                                             <Input placeholder="Enter country" {...field}/>
                                         </FormControl>
-                                        <FormDescription>
-                                            This is your public display name.
-                                        </FormDescription>
                                         <FormMessage/>
                                     </FormItem>
                                 )}
@@ -136,6 +133,7 @@ const ShippingAddressForm = ({ address }: {address: ShippingAddress}) => {
                                 ) : (
                                     <ArrowRight className="w-4 h-4"/>
                                 )}
+                                Continue
                             </Button>
                         </div>
                     </form>

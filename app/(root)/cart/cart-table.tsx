@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { useTransition } from "react";
 import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart.actions";
-import { ArrowRight, Loader, LOader, Minus, Plus } from "lucide-react";
+import { ArrowRight, Loader, Minus, Plus } from "lucide-react";
 import { Cart } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
@@ -35,7 +35,6 @@ const CartTable = ({cart}: {cart?: Cart}) => {
             ) : (
                 <div className="grid md:grid-cols-4 md:gap-5">
                     <div className="overflow-x-auto md:col-span-3">
-                        {/* <table></table> */}
                         <Table>
                             <TableHeader>
                                 <TableRow>
@@ -135,7 +134,7 @@ const CartTable = ({cart}: {cart?: Cart}) => {
                         </CardContent>
                     </Card>
                 </div>
-            )};
+            )}
         </>
     );
 }
