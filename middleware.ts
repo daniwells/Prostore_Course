@@ -1,13 +1,12 @@
-import { GetServerSidePropsContext } from 'next';
+import { NextRequest } from "next/server";
+import { authorized } from "./auth.config";
 
-export async function middleware(req: GetServerSidePropsContext) {
-    // Importação dinâmica da lógica de autenticação
-    const { auth } = await import('@/auth');
-    return auth(req);
-  }
-  
-// Força o middleware a rodar no Node.js
+// A função do middleware precisa ser exportada com o nome correto
+export async function middleware(request: NextRequest) {
+    return authorized(request);
+}
+
+// Força o middleware a rodar no Node.js, ao invés do Edge Runtime
 export const config = {
-    runtime: "nodejs",
+  runtime: "nodejs",
 };
-  
