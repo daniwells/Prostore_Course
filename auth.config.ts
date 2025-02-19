@@ -16,6 +16,7 @@ export async function authorized(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     const auth = request.cookies.get("next-auth.session-token");
+    
     // Check if user is not authenticated and accessing a protected path
     if (!auth && protectedPaths.some((p) => p.test(pathname))) return NextResponse.redirect(new URL("/sign-in", request.url));
 
