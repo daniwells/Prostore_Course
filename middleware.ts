@@ -1,6 +1,13 @@
-export { auth as middleware } from "@/auth";
+import { GetServerSidePropsContext } from 'next';
 
-// Força o middleware a ser executado no ambiente node, ao invés do navegador
+export async function middleware(req: GetServerSidePropsContext) {
+    // Importação dinâmica da lógica de autenticação
+    const { auth } = await import('@/auth');
+    return auth(req);
+  }
+  
+// Força o middleware a rodar no Node.js
 export const config = {
     runtime: "nodejs",
 };
+  
