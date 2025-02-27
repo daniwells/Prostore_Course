@@ -86,7 +86,7 @@ export const config = {
                         });
 
                         if(sessionCart){
-                            // Deçete current user cart
+                            // Delete current user cart
                             await prisma.cart.deleteMany({
                                 where: {userId: user.id},
                             });
