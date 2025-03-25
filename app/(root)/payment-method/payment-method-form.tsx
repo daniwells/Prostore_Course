@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { useTransition } from "react";
 import { paymentMethodSchema } from "@/lib/validators";
-import CheckoutSteps from "@/components/shared/checkout-steps";
+// import CheckoutSteps from "@/components/shared/checkout-steps";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DEFAULT_PAYMENT_METHOD } from "@/lib/constants";

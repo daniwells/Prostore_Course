@@ -28,5 +28,38 @@ export const prisma = new PrismaClient({ adapter }).$extends({
         },
       },
     },
+    cart: {
+      itemsPrice: {
+        needs: { itemsPrice: true },
+        compute(cart: any){
+          return cart.itemsPrice.toString();
+        }
+      },
+      shippingPrice: {
+        needs: { itemsPrice: true },
+        compute(cart: any){
+          return cart.itemsPrice.toString();
+        }
+      },
+      taxPrice: {
+        needs: { itemsPrice: true },
+        compute(cart: any){
+          return cart.itemsPrice.toString();
+        }
+      },
+      totalPrice: {
+        needs: { itemsPrice: true },
+        compute(cart: any){
+          return cart.itemsPrice.toString();
+        }
+      },
+    },
+    orderItem: {
+      price: {
+        compute(cart){
+          return cart.price.toString();
+        }
+      }
+    }
   },
 });
