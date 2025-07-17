@@ -101,7 +101,15 @@ export async function getOrderById(orderId: string){
         }
     });
 
-    return convertToPlainObject(data);
+    if (!data) return null;
+
+    return convertToPlainObject({
+        ...data,
+        itemsPrice: data.itemsPrice.toString(),
+        shippingPrice: data.shippingPrice.toString(),
+        taxPrice: data.taxPrice.toString(),
+        totalPrice: data.totalPrice.toString(),
+    });
 };
 
 // Create new paypal order
