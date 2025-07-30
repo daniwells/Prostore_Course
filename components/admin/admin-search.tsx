@@ -10,7 +10,7 @@ const AdminSearch = ({}) => {
         "/admin/orders" 
     : 
         pathname.includes("/admin/users") ? 
-            "admin/users" 
+            "/admin/users" 
         : 
             "/admin/products";
 
