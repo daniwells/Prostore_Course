@@ -5,7 +5,7 @@ import { Review } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
 import ReviewForm from "./review-form";
-import { getReviews } from "@/lib/review.actions";
+import { getReviews } from "@/lib/actions/review.actions";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Calendar, User } from "lucide-react";
 import { formatDateTime } from "@/lib/utils";

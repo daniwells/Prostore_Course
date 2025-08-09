@@ -10,7 +10,6 @@ const SuccessPage = async (props: {
     params: Promise<{ id: string }>;
     searchParams: Promise<{ payment_intent: string }>;
 }) => {
-
     const { id } = await props.params;
     const { payment_intent: paymentIntentId } = await props.searchParams;
 

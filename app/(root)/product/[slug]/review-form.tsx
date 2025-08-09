@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { StarIcon } from "lucide-react";
-import { createUpdateReview, getReviewByProductId } from "@/lib/review.actions";
+import { createUpdateReview, getReviewByProductId } from "@/lib/actions/review.actions";
 
 const ReviewForm = ({ userId, productId, onReviewSubmitted }: {
     userId: string;
