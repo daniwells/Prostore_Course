@@ -40,9 +40,8 @@ const OrderDetailsTable = ({
     isAdmin: boolean;
 }) => {
     const { 
-        // id,
         shippingAddress,
-        OrderItem,
+        orderItem,
         itemsPrice,
         shippingPrice,
         taxPrice,
@@ -186,7 +185,7 @@ const OrderDetailsTable = ({
                                 </TableHeader>
                                 <TableBody>
                                     {
-                                        OrderItem.map((item) => (
+                                        orderItem.map((item) => (
                                             <TableRow key={item.slug}>
                                                 <TableCell>
                                                     <Link href={`/product/{item.slug}`} className="flex items-center">

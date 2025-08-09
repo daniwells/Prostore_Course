@@ -6,6 +6,9 @@ import ProductPrice from "@/components/shared/product/product-price";
 import ProductImages from "@/components/shared/product/product-images";
 import AddToCart from "@/components/shared/product/add-to-cart";
 import { getMyCart } from "@/lib/actions/cart.actions";
+import ReviewList from "./review-list";
+import { auth } from "@/auth";
+import Rating from "@/components/shared/product/rating";
 
 const Product = async (props: {
     params: Promise<{slug:string}>
@@ -15,9 +18,12 @@ const Product = async (props: {
     const product = await getProductBySlug(slug);
     if(!product) notFound();
 
+    const session = await auth();
+    const userId = session?.user?.id;
+
     const cart = await getMyCart();
 
-    return ( 
+    return <>
         <section>
             <div className="grid grid-cols-1 md:grid-cols-5">
                 <div className="col-span-2">
@@ -29,7 +35,9 @@ const Product = async (props: {
                             {product.brand} {product.category}
                         </p>
                         <h1 className="h3-bold">{product.name}</h1>
-                        <p>{product.rating} of {product.numReviews} Reviews</p>
+                        <Rating value={Number(product.rating)}/>
+                        <p>{ product.numReviews } Reviews</p>
+                        {/* <p>{product.rating} of {product.numReviews} Reviews</p> */}
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                             <ProductPrice 
                                 value={product.price} 
@@ -84,7 +92,18 @@ const Product = async (props: {
                 </div>
             </div>
         </section> 
-    );
+        <div className="mt-10">
+            <h2 className="h2-bold">
+            </h2>
+            <ReviewList
+                userId={ userId || "" }
+                productId={product.id}
+                productSlug={product.slug}
+            >
+
+            </ReviewList>
+        </div>
+    </>;
 }
  
 export default Product;
