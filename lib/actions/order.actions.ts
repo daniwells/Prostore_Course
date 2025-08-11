@@ -8,10 +8,11 @@ import { getMyCart } from "./cart.actions";
 import { insertOrderSchema } from "../validators";
 import { prisma } from "@/db/prisma";
 import { Prisma } from "@prisma/client";
-import { CartItem, PaymentResult } from "@/types";
+import { CartItem, PaymentResult, ShippingAddress } from "@/types";
 import { paypal } from "../paypal";
 import { revalidatePath } from "next/cache";
 import { PAGE_SIZE } from "../constants";
+import { sendPurchaseReceipt } from "@/email";
 // import { truncateByDomain } from "recharts/types/util/ChartUtils";
 
 // Create order and create order items
@@ -257,6 +258,19 @@ export async function updateOrderToPaid({
     });
 
     if(!updateOrder) throw new Error("Order not found");
+    
+    console.log("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
+    sendPurchaseReceipt({
+        order: {
+            ...updateOrder,
+            shippingAddress: updateOrder.shippingAddress as ShippingAddress,
+            paymentResult: updateOrder.paymentResult as PaymentResult,
+            itemsPrice: String(updateOrder.itemsPrice),
+            shippingPrice: String(updateOrder.shippingPrice),
+            totalPrice: String(updateOrder.totalPrice),
+            taxPrice: String(updateOrder.taxPrice),
+        }
+    });
 }
 
 // Get user's orders
