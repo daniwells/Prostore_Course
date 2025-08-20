@@ -41,11 +41,12 @@ export async function signInWithCredentials(prevState: unknown, formData: FormDa
 
 export async function signOutUser(){
     const currentCart = await getMyCart();
-    await prisma.cart.delete({ where: { id: currentCart?.id } });
+    if(currentCart?.id){
+        await prisma.cart.delete({ where: { id: currentCart?.id } });
+    }
     await signOut();
 }
 
-// Sign up user
 export async function signUpUser(prevState: unknown, formData: FormData){
     try{
         const user = signUpFormSchema.parse({

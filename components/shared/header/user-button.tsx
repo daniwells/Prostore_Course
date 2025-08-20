@@ -24,7 +24,7 @@ const UserButton = async () => {
         );
     }
 
-    // const firstInitial = session.user?.name?.charAt(0).toUpperCase() ?? "U";
+    const firstInitial = session.user?.name?.charAt(0).toUpperCase() ?? "U";
 
     return ( 
         <div className="flex gap-2 items-center">
@@ -32,7 +32,7 @@ const UserButton = async () => {
                 <DropdownMenuTrigger asChild>
                     <div className="flex items-center">
                         <Button variant="ghost" className="relative w-8 h-8 rounded-full fkex ml-2 items-center justify-center bg-gray-200">
-                            J
+                            {firstInitial}
                         </Button>
                     </div>
                 </DropdownMenuTrigger>

@@ -16,15 +16,12 @@ import { Order } from "@/types";
 import { formatCurrency } from "@/lib/utils";
 import sampleData from "@/db/sample-data";
 
-
-// require('dotenv').config();
-
 PurchaseReceiptEmail.PreviewProps = {
     order: {
         id: crypto.randomUUID(),
         userId: "123",
         user: {
-            name: "John Doe",
+            name: "Lima Daniel",
             email: "test@test.com",
         },
         paymentMethod: "Stripe",
