@@ -18,20 +18,20 @@ const AddToCart = ({cart, item }: {cart?: Cart, item: CartItem }) => {
         startTransition(async () => {
             const res = await addItemToCart(item);
 
-            if(!res.sucess){
+            if(!res.success){
                 toast({
                     variant: "destructive",
                     description: res.message
                 });
-
                 return;
             }
 
             // Handle success add to art
             toast({
+                variant: "default",
                 description: `${item.name} added to cart`,
                 action: (
-                    <ToastAction 
+                    <ToastAction
                         className="bg-primary text-white hover:bg-gray-800" 
                         altText="Go To Cart"
                         onClick={() => router.push("/cart")}

@@ -55,7 +55,7 @@ export async function addItemToCart(data: CartItem){
                 userId: userId,
                 items: [item],
                 sessionCartId: sessionCartId,
-                ...calcPrice([]),
+                ...calcPrice([item]),
             });
 
             // Add to database
@@ -105,7 +105,7 @@ export async function addItemToCart(data: CartItem){
             revalidatePath(`/product/${product.slug}`);
 
             return {
-                sucess: true,
+                success: true,
                 message: `${product.name} ${existItem ? "updated in" : "added to"} cart`
             }
         }
