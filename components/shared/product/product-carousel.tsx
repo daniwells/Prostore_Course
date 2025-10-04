@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const ProductCarousel = ({ data }: { data: Product[]}) => {
-    return <div className="px-6" >    
+    return <div className="md:px-6 mx-[-20px] " >    
         <Carousel 
             className="w-full mb-12"
             opts={{
@@ -15,7 +15,7 @@ const ProductCarousel = ({ data }: { data: Product[]}) => {
             }}
             plugins={[
                 Autoplay({
-                    delay: 2000,
+                    delay: 5000,
                     stopOnInteraction: true,
                     stopOnMouseEnter: true,
                 }),
@@ -35,10 +35,10 @@ const ProductCarousel = ({ data }: { data: Product[]}) => {
                                         height="0"
                                         width="0"
                                         sizes="100vw"
-                                        className="w-full h-[30rem] object-contain"
+                                        className="w-full h-[15rem] sm:h-[20rem] md:h-[30rem] object-contain"
                                     />
                                     <div className="absolute inset-0 flex items-end justify-center">
-                                        <h2 className="bg-gray-900 bg-opacity-50 text-2xl font-bold text-white">
+                                        <h2 className="bg-gray-900 bg-opacity-50 text-sm sm:text-base md:text-2xl font-bold text-white">
                                             { product.name }
                                         </h2>
                                     </div>

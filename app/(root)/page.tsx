@@ -23,7 +23,7 @@ const  HomePage = async () => {
       data={latestProducts} 
       title="Newest Arrivals"
       limit={6}
-    />  
+    />
     <ViewAllProductsButton/>
     <DealCountDown/>
     <IconBoxes/>

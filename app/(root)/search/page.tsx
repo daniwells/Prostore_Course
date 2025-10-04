@@ -1,6 +1,7 @@
 import ProductCard from "@/components/shared/product/product-card";
 import { Button } from "@/components/ui/button";
 import { getAllProducts, getAllCategories } from "@/lib/actions/product.actions";
+import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 
 const prices = [
@@ -119,82 +120,86 @@ const SearchPage = async (props: {
     });
 
     return <div className="grid md:grid-cols-5 md:gap-5">
-        <div className="filter-links">
-            {/* Category Links */}
-            <div className="text-xl mb-2 mt-3">
-                Department
-            </div>
-            <div>
-                <ul className="space-y-1">
-                    <li>
-                        <Link 
-                            className={`${(category === "all" || category === "") && "font-bold"}`}
-                            href={getFilterUrl({c: "all"})}
-                        >
-                            Any
-                        </Link>
-                    </li>
-                    { categories.map((x) => (
-                        <li key={x.category}>
-                            <Link
-                                className={`${category === x.category && "font-bold"}`}
-                                href={getFilterUrl({ c: x.category })}
-                            >
-                                {x.category}
-                            </Link>
-                        </li>
-                    )) }
-                </ul>
-            </div>
-            {/* Price Links */}
-            <div className="text-xl mb-2 mt-8">Price</div>
-            <div>
-                <ul className="space-y-1">
-                    <li>
-                        <Link 
-                            className={`${price === "all" && "font-bold"}`}
-                            href={getFilterUrl({p: "all"})}
-                        >
-                            Any
-                        </Link>
-                    </li>
-                    { prices.map((p) => (
-                        <li key={p.value}>
-                            <Link
-                                className={`${price === p.value && "font-bold"}`}
-                                href={getFilterUrl({ p: p.value })}
-                            >
-                                {p.name}
-                            </Link>
-                        </li>
-                    )) }
-                </ul>
-            </div>
-             {/* Rating Links */}
-            <div className="text-xl mb-2 mt-8">Customer Ratings</div>
-            <div>
-                <ul className="space-y-1">
-                    <li>
-                        <Link 
-                            className={`${rating === "all" && "font-bold"}`}
-                            href={getFilterUrl({r: "all"})}
-                        >
-                            Any
-                        </Link>
-                    </li>
-                    { ratings.map((r) => (
-                        <li key={r}>
-                            <Link
-                                className={`${rating === r.toString() && "font-bold"}`}
-                                href={getFilterUrl({ r: `${r}` })}
-                            >
-                                {`${r} starts & up`}
-                            </Link>
-                        </li>
-                    )) }
-                </ul>
-            </div>
-        </div>
+        <Card>
+            <CardContent className="p-4">
+                <div className="filter-links">
+                    {/* Category Links */}
+                    <div className="text-xl mb-2 mt-3">
+                        Department
+                    </div>
+                    <div>
+                        <ul className="space-y-1">
+                            <li>
+                                <Link 
+                                    className={`${(category === "all" || category === "") && "font-bold"}`}
+                                    href={getFilterUrl({c: "all"})}
+                                >
+                                    Any
+                                </Link>
+                            </li>
+                            { categories.map((x) => (
+                                <li key={x.category}>
+                                    <Link
+                                        className={`${category === x.category && "font-bold"}`}
+                                        href={getFilterUrl({ c: x.category })}
+                                    >
+                                        {x.category}
+                                    </Link>
+                                </li>
+                            )) }
+                        </ul>
+                    </div>
+                    {/* Price Links */}
+                    <div className="text-xl mb-2 mt-8">Price</div>
+                    <div>
+                        <ul className="space-y-1">
+                            <li>
+                                <Link 
+                                    className={`${price === "all" && "font-bold"}`}
+                                    href={getFilterUrl({p: "all"})}
+                                >
+                                    Any
+                                </Link>
+                            </li>
+                            { prices.map((p) => (
+                                <li key={p.value}>
+                                    <Link
+                                        className={`${price === p.value && "font-bold"}`}
+                                        href={getFilterUrl({ p: p.value })}
+                                    >
+                                        {p.name}
+                                    </Link>
+                                </li>
+                            )) }
+                        </ul>
+                    </div>
+                    {/* Rating Links */}
+                    <div className="text-xl mb-2 mt-8">Customer Ratings</div>
+                    <div>
+                        <ul className="space-y-1">
+                            <li>
+                                <Link 
+                                    className={`${rating === "all" && "font-bold"}`}
+                                    href={getFilterUrl({r: "all"})}
+                                >
+                                    Any
+                                </Link>
+                            </li>
+                            { ratings.map((r) => (
+                                <li key={r}>
+                                    <Link
+                                        className={`${rating === r.toString() && "font-bold"}`}
+                                        href={getFilterUrl({ r: `${r}` })}
+                                    >
+                                        {`${r} starts & up`}
+                                    </Link>
+                                </li>
+                            )) }
+                        </ul>
+                    </div>
+                </div>
+            </CardContent>
+        </Card>
         <div className="md:col-span-4 space-y-4">
             <div className="flex-between flex-col my-4 md:flex-row">
                 <div className="flex items-center">
@@ -229,13 +234,11 @@ const SearchPage = async (props: {
                     }
                 </div>
             </div>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
                 { products.data.length === 0 && <div>No Products Found</div> }
                 { 
                     products.data.map((product) => (
-                        <ProductCard key={product.id} product={product}>
-
-                        </ProductCard>
+                        <ProductCard key={product.id} product={product}/>
                     )) 
                 }
             </div>

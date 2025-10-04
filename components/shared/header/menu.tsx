@@ -5,6 +5,7 @@ import { ShoppingCart, EllipsisVertical } from "lucide-react";
 import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import UserButton from "./user-button";
 
+
 const Menu = () => {
     return ( 
         <div className="flex justify-end gap-3">
@@ -22,18 +23,18 @@ const Menu = () => {
                     <SheetTrigger className="align-middle">
                         <EllipsisVertical/>
                     </SheetTrigger>
-                    <SheetContent className="flex flex-col items-start">
-                        <SheetTitle>Menu</SheetTitle>
-                        <ModeToggle/>
-                        <Button asChild variant="ghost">
+                    <SheetContent className="flex flex-col items-start" >
+                        <div className="flex gap-5 items-center">
+                            <UserButton/>
+                            <SheetTitle>Menu</SheetTitle>
+                        </div>
+                        <ModeToggle/> 
+                        <Button className="w-full" asChild variant="ghost">
                             <Link href="/cart">
                                 <ShoppingCart/> Cart
                             </Link>
                         </Button>
-                        <UserButton/>
-                        <SheetDescription>
-
-                        </SheetDescription>
+                        <SheetDescription></SheetDescription>
                     </SheetContent>
                 </Sheet>
             </nav>
